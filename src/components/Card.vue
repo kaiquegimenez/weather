@@ -60,9 +60,10 @@ export default {
       axios.get(`${this.url_base}weather?q=${this.weather.name}&units=metric&APPID=${this.api_key}`)
         .then((res) => {
           this.showLoader = false;
-          const temp = res.data.main.temp
+          const temp = parseInt(res.data.main.temp)
           this.weather.main = res.data.main;
-          this.weather.color = temp <= 5 ? 'blue' : temp > 5 && temp <= 25 ? 'orange' : 'red'
+          console.log('temp', temp)
+          this.weather.color = temp < 6 ? 'blue' : temp >= 6 && temp <= 25 ? 'orange' : 'red'
           this.weather.time = moment();
           this.timeToSave(600000)
           this.saveInCache()
@@ -98,8 +99,8 @@ export default {
   background-color: white;
   margin: 20px;
   border-radius: 5px;
-  color: #737C84;
-  font-family: Helvetica;
+  color: var(--dark-gray);
+  box-shadow: 1px 1px 15px 1px rgba(51,51,51,0.1);
 
   @media (max-width: 600px){
     margin: 20px 0;
@@ -118,7 +119,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #ED1946;
+    color: var(--red);
     padding: 40px 0;
     
     button {
@@ -126,15 +127,14 @@ export default {
       justify-content: center;
       align-items: center;
       background: none;
-      border: 2px solid #333333;
+      border: 2px solid var(--dark-gray);
       border-radius: 20px;
       width: 100px;
       padding: 10px 0;
-      font-family: Helvetica;
       cursor: pointer;
 
       &:hover {
-        background-color: #333333;
+        background-color: var(--dark-gray);
         color: white;
       }
       
@@ -145,9 +145,8 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid #EBEBEB;
+    border-bottom: 1px solid var(--gray-divider);
     width: 100%;
-    box-shadow: #333333;
   }
 
   .card-body {
@@ -155,15 +154,15 @@ export default {
     padding: 20px 0;
 
     &--blue {
-      color: #69A3FF;
+      color: var(--blue);
     }
 
     &--orange {
-      color: #FF9632;
+      color: var(--orange);
     }
 
     &--red {
-      color: #ED1946;
+      color: var(--red);
     }
   }
 
@@ -171,10 +170,10 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #F1F1F1;
+    background-color: var(--light-gray);
     opacity: .5;
     width: 100%;
-    color: #B4B4B4;
+    color: var(--gray);
     padding: 10px 0;
 
     .footer-container {
@@ -189,7 +188,7 @@ export default {
         align-items: center;
 
         p {
-          color: #737C84;
+          color: var(--dark-gray);
           font-weight: 600;
           margin: 5px;
         }

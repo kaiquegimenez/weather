@@ -61,7 +61,7 @@ export default {
     getWeathers(city) {
       axios.get(`${this.url_base}weather?q=${city}&units=metric&APPID=${this.api_key}`)
         .then((res) => {
-          const temp = res.data.main.temp;
+          const temp = parseInt(res.data.main.temp);
           this.weathers[city].main = res.data.main;
           this.weathers[city].name = city;
           this.weathers[city].time = moment();
@@ -109,7 +109,7 @@ export default {
     align-items: center;
     height: 100%;
     width: 70%;
-    background-color: #f1f1f1;
+    background-color: var(--light-gray);
     @media (max-width: 600px) {
       flex-direction: column;
     }
