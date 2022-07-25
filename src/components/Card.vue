@@ -62,8 +62,7 @@ export default {
           this.showLoader = false;
           const temp = parseInt(res.data.main.temp)
           this.weather.main = res.data.main;
-          console.log('temp', temp)
-          this.weather.color = temp < 6 ? 'blue' : temp >= 6 && temp <= 25 ? 'orange' : 'red'
+          this.weather.color = temp <= 5 ? 'blue' : temp > 5 && temp <= 25 ? 'orange' : 'red'
           this.weather.time = moment();
           this.timeToSave(600000)
           this.saveInCache()
